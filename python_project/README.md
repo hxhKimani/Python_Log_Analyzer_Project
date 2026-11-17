@@ -17,16 +17,16 @@ A lightweight, streaming-first security log analysis CLI built with Python 3.11 
 
 ```bash
 # Run against sample SSH brute-force logs
-python3 -m sentinel_log.cli --input samples/auth_bruteforce.log
+py -m sentinel_log.cli --input samples/auth_bruteforce.log
 
 # Export web attack findings as JSON with custom thresholds
-python3 -m sentinel_log.cli -i samples/web_attacks.log -f json -o report.json
+py -m sentinel_log.cli -i samples/web_attacks.log -f json -o report.json
 
 # Pipe live logs via stdin
-cat samples/*.log | python3 -m sentinel_log.cli -i - -f markdown
+cat samples/*.log | py -m sentinel_log.cli -i - -f markdown
 
 # Run the unit test suite
-python3 -m unittest discover -s tests -v
+py -m unittest discover -s tests -v
 ```
 
 ## Project Structure
