@@ -1,34 +1,11 @@
 {
-  "total_lines": 39,
-  "parsed_events": 39,
+  "total_lines": 12,
+  "parsed_events": 12,
   "unparsed_lines": 0,
   "detected_formats": {
-    "auth": 15,
-    "firewall": 12,
     "web": 12
   },
   "alerts": [
-    {
-      "rule_id": "AUTH_PRIVILEGED_LOGIN",
-      "title": "Successful SSH Login Following Failed Attempts",
-      "severity": "critical",
-      "source_ip": "91.240.118.172",
-      "description": "Source 91.240.118.172 authenticated as 'root' after 5 prior failed login attempts.",
-      "mitre_id": "T1078.003",
-      "mitre_tactic": "Persistence / Privilege Escalation",
-      "mitre_technique": "Valid Accounts: Local Accounts",
-      "event_count": 6,
-      "first_seen": "2026-11-17T09:05:10+00:00",
-      "last_seen": "2026-11-17T09:05:42+00:00",
-      "evidence": [
-        "L9: Nov 17 09:05:10 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60111 ssh2",
-        "L10: Nov 17 09:05:14 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60112 ssh2",
-        "L11: Nov 17 09:05:19 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60113 ssh2",
-        "L12: Nov 17 09:05:24 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60114 ssh2",
-        "L13: Nov 17 09:05:30 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60115 ssh2"
-      ],
-      "remediation": "Immediately isolate host, revoke active SSH sessions, rotate credentials, and inspect bash history/persistence."
-    },
     {
       "rule_id": "WEB_SQL_INJECTION",
       "title": "SQL Injection Payload Detected",
@@ -42,52 +19,10 @@
       "first_seen": "2026-11-17T09:15:03+00:00",
       "last_seen": "2026-11-17T09:15:05+00:00",
       "evidence": [
-        "L30: 198.51.100.42 - - [17/Nov/2026:09:15:03 +0000] \"GET /products?id=1%27%20OR%201=1 HTTP/1.1\" 500 512 \"-\" \"sqlmap/1.7\"",
-        "L31: 198.51.100.42 - - [17/Nov/2026:09:15:05 +0000] \"GET /products?id=1%20UNION%20SELECT%20username,password%20FROM%20users HTTP/1.1\" 500 512 \"-\" \"sqlmap/1.7\""
+        "L3: 198.51.100.42 - - [17/Nov/2026:09:15:03 +0000] \"GET /products?id=1%27%20OR%201=1 HTTP/1.1\" 500 512 \"-\" \"sqlmap/1.7\"",
+        "L4: 198.51.100.42 - - [17/Nov/2026:09:15:05 +0000] \"GET /products?id=1%20UNION%20SELECT%20username,password%20FROM%20users HTTP/1.1\" 500 512 \"-\" \"sqlmap/1.7\""
       ],
       "remediation": "Verify parameterized queries on affected endpoints, inspect WAF logs, and audit database query logs for data exfiltration."
-    },
-    {
-      "rule_id": "AUTH_CREDENTIAL_STUFFING",
-      "title": "Distributed Username Spraying / Credential Stuffing",
-      "severity": "high",
-      "source_ip": "185.220.101.4",
-      "description": "7 failed SSH attempts from 185.220.101.4 within 120s window targeting 6 account(s): admin, oracle, postgres, root, test.",
-      "mitre_id": "T1110.004",
-      "mitre_tactic": "Credential Access",
-      "mitre_technique": "Brute Force: Credential Stuffing",
-      "event_count": 7,
-      "first_seen": "2026-11-17T09:04:01+00:00",
-      "last_seen": "2026-11-17T09:04:44+00:00",
-      "evidence": [
-        "L2: Nov 17 09:04:01 prod-bastion-01 sshd[1901]: Failed password for invalid user admin from 185.220.101.4 port 51201 ssh2",
-        "L3: Nov 17 09:04:08 prod-bastion-01 sshd[1901]: Failed password for invalid user admin from 185.220.101.4 port 51202 ssh2",
-        "L4: Nov 17 09:04:15 prod-bastion-01 sshd[1901]: Failed password for root from 185.220.101.4 port 51203 ssh2",
-        "L5: Nov 17 09:04:21 prod-bastion-01 sshd[1901]: Failed password for invalid user oracle from 185.220.101.4 port 51204 ssh2",
-        "L6: Nov 17 09:04:29 prod-bastion-01 sshd[1901]: Failed password for invalid user postgres from 185.220.101.4 port 51205 ssh2"
-      ],
-      "remediation": "Block offending IP at perimeter firewall, enforce key-only SSH auth, and verify targeted accounts for compromise."
-    },
-    {
-      "rule_id": "AUTH_BRUTE_FORCE",
-      "title": "SSH Brute-Force Authentication Burst",
-      "severity": "high",
-      "source_ip": "91.240.118.172",
-      "description": "5 failed SSH attempts from 91.240.118.172 within 120s window targeting 1 account(s): root.",
-      "mitre_id": "T1110.001",
-      "mitre_tactic": "Credential Access",
-      "mitre_technique": "Brute Force: Password Guessing",
-      "event_count": 5,
-      "first_seen": "2026-11-17T09:05:10+00:00",
-      "last_seen": "2026-11-17T09:05:30+00:00",
-      "evidence": [
-        "L9: Nov 17 09:05:10 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60111 ssh2",
-        "L10: Nov 17 09:05:14 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60112 ssh2",
-        "L11: Nov 17 09:05:19 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60113 ssh2",
-        "L12: Nov 17 09:05:24 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60114 ssh2",
-        "L13: Nov 17 09:05:30 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60115 ssh2"
-      ],
-      "remediation": "Block offending IP at perimeter firewall, enforce key-only SSH auth, and verify targeted accounts for compromise."
     },
     {
       "rule_id": "WEB_XSS_PROBE",
@@ -102,7 +37,7 @@
       "first_seen": "2026-11-17T09:16:20+00:00",
       "last_seen": "2026-11-17T09:16:20+00:00",
       "evidence": [
-        "L35: 192.0.2.88 - - [17/Nov/2026:09:16:20 +0000] \"GET /search?q=%3Cscript%3Ealert(document.cookie)%3C/script%3E HTTP/1.1\" 400 280 \"-\" \"Mozilla/5.0\""
+        "L8: 192.0.2.88 - - [17/Nov/2026:09:16:20 +0000] \"GET /search?q=%3Cscript%3Ealert(document.cookie)%3C/script%3E HTTP/1.1\" 400 280 \"-\" \"Mozilla/5.0\""
       ],
       "remediation": "Validate output encoding and Content-Security-Policy headers on targeted routes."
     },
@@ -119,30 +54,9 @@
       "first_seen": "2026-11-17T09:16:25+00:00",
       "last_seen": "2026-11-17T09:16:25+00:00",
       "evidence": [
-        "L36: 192.0.2.88 - - [17/Nov/2026:09:16:25 +0000] \"GET /download?file=../../../../etc/passwd HTTP/1.1\" 403 190 \"-\" \"curl/8.4.0\""
+        "L9: 192.0.2.88 - - [17/Nov/2026:09:16:25 +0000] \"GET /download?file=../../../../etc/passwd HTTP/1.1\" 403 190 \"-\" \"curl/8.4.0\""
       ],
       "remediation": "Enforce canonical path allowlists in file-serving handlers and verify web root permissions."
-    },
-    {
-      "rule_id": "FW_PORT_SCAN",
-      "title": "Multi-Port Reconnaissance Scan",
-      "severity": "medium",
-      "source_ip": "45.155.205.91",
-      "description": "Source 45.155.205.91 triggered 9 firewall blocks across 9 distinct destination ports (21, 22, 23, 80, 443, 445, 3389, 5432, 6379).",
-      "mitre_id": "T1046",
-      "mitre_tactic": "Discovery",
-      "mitre_technique": "Network Service Discovery",
-      "event_count": 9,
-      "first_seen": "2026-11-17T09:18:10+00:00",
-      "last_seen": "2026-11-17T09:18:16+00:00",
-      "evidence": [
-        "L16: Nov 17 09:18:10 gw-fw-01 kernel: [12034.12] [UFW BLOCK] IN=eth0 OUT= SRC=45.155.205.91 DST=10.0.1.15 PROTO=TCP SPT=49822 DPT=21 SYN",
-        "L17: Nov 17 09:18:11 gw-fw-01 kernel: [12035.04] [UFW BLOCK] IN=eth0 OUT= SRC=45.155.205.91 DST=10.0.1.15 PROTO=TCP SPT=49823 DPT=22 SYN",
-        "L18: Nov 17 09:18:11 gw-fw-01 kernel: [12035.48] [UFW BLOCK] IN=eth0 OUT= SRC=45.155.205.91 DST=10.0.1.15 PROTO=TCP SPT=49824 DPT=23 SYN",
-        "L19: Nov 17 09:18:12 gw-fw-01 kernel: [12036.02] [UFW BLOCK] IN=eth0 OUT= SRC=45.155.205.91 DST=10.0.1.15 PROTO=TCP SPT=49825 DPT=80 SYN",
-        "L20: Nov 17 09:18:12 gw-fw-01 kernel: [12036.66] [UFW BLOCK] IN=eth0 OUT= SRC=45.155.205.91 DST=10.0.1.15 PROTO=TCP SPT=49826 DPT=443 SYN"
-      ],
-      "remediation": "Add dynamic block rule for scanning source IP and confirm no unintended services are exposed."
     },
     {
       "rule_id": "WEB_VULN_SCANNER",
@@ -157,11 +71,11 @@
       "first_seen": "2026-11-17T09:15:03+00:00",
       "last_seen": "2026-11-17T09:15:14+00:00",
       "evidence": [
-        "L30: 198.51.100.42 - - [17/Nov/2026:09:15:03 +0000] \"GET /products?id=1%27%20OR%201=1 HTTP/1.1\" 500 512 \"-\" \"sqlmap/1.7\"",
-        "L31: 198.51.100.42 - - [17/Nov/2026:09:15:05 +0000] \"GET /products?id=1%20UNION%20SELECT%20username,password%20FROM%20users HTTP/1.1\" 500 512 \"-\" \"sqlmap/1.7\"",
-        "L32: 198.51.100.42 - - [17/Nov/2026:09:15:09 +0000] \"GET /.env HTTP/1.1\" 404 162 \"-\" \"sqlmap/1.7\"",
-        "L33: 198.51.100.42 - - [17/Nov/2026:09:15:11 +0000] \"GET /.git/config HTTP/1.1\" 404 162 \"-\" \"sqlmap/1.7\"",
-        "L34: 198.51.100.42 - - [17/Nov/2026:09:15:14 +0000] \"GET /wp-login.php HTTP/1.1\" 404 162 \"-\" \"sqlmap/1.7\""
+        "L3: 198.51.100.42 - - [17/Nov/2026:09:15:03 +0000] \"GET /products?id=1%27%20OR%201=1 HTTP/1.1\" 500 512 \"-\" \"sqlmap/1.7\"",
+        "L4: 198.51.100.42 - - [17/Nov/2026:09:15:05 +0000] \"GET /products?id=1%20UNION%20SELECT%20username,password%20FROM%20users HTTP/1.1\" 500 512 \"-\" \"sqlmap/1.7\"",
+        "L5: 198.51.100.42 - - [17/Nov/2026:09:15:09 +0000] \"GET /.env HTTP/1.1\" 404 162 \"-\" \"sqlmap/1.7\"",
+        "L6: 198.51.100.42 - - [17/Nov/2026:09:15:11 +0000] \"GET /.git/config HTTP/1.1\" 404 162 \"-\" \"sqlmap/1.7\"",
+        "L7: 198.51.100.42 - - [17/Nov/2026:09:15:14 +0000] \"GET /wp-login.php HTTP/1.1\" 404 162 \"-\" \"sqlmap/1.7\""
       ],
       "remediation": "Rate-limit or block scanner IP/ASN and ensure sensitive dotfiles (.env, .git) are non-routable."
     },
@@ -178,71 +92,20 @@
       "first_seen": "2026-11-17T09:17:01+00:00",
       "last_seen": "2026-11-17T09:17:03+00:00",
       "evidence": [
-        "L37: 45.83.220.14 - - [17/Nov/2026:09:17:01 +0000] \"GET /wp-admin/install.php HTTP/1.1\" 404 162 \"-\" \"Nuclei - Open-source project\"",
-        "L38: 45.83.220.14 - - [17/Nov/2026:09:17:02 +0000] \"GET /phpmyadmin/index.php HTTP/1.1\" 404 162 \"-\" \"Nuclei - Open-source project\"",
-        "L39: 45.83.220.14 - - [17/Nov/2026:09:17:03 +0000] \"GET /actuator/health HTTP/1.1\" 404 162 \"-\" \"Nuclei - Open-source project\""
+        "L10: 45.83.220.14 - - [17/Nov/2026:09:17:01 +0000] \"GET /wp-admin/install.php HTTP/1.1\" 404 162 \"-\" \"Nuclei - Open-source project\"",
+        "L11: 45.83.220.14 - - [17/Nov/2026:09:17:02 +0000] \"GET /phpmyadmin/index.php HTTP/1.1\" 404 162 \"-\" \"Nuclei - Open-source project\"",
+        "L12: 45.83.220.14 - - [17/Nov/2026:09:17:03 +0000] \"GET /actuator/health HTTP/1.1\" 404 162 \"-\" \"Nuclei - Open-source project\""
       ],
       "remediation": "Rate-limit or block scanner IP/ASN and ensure sensitive dotfiles (.env, .git) are non-routable."
-    },
-    {
-      "rule_id": "FW_SENSITIVE_PORT_PROBE",
-      "title": "Repeated Probing of Administrative / Database Ports",
-      "severity": "medium",
-      "source_ip": "103.42.91.18",
-      "description": "Source 103.42.91.18 repeatedly probed sensitive service port(s): 3389.",
-      "mitre_id": "T1021",
-      "mitre_tactic": "Lateral Movement",
-      "mitre_technique": "Remote Services Probing",
-      "event_count": 3,
-      "first_seen": "2026-11-17T09:19:02+00:00",
-      "last_seen": "2026-11-17T09:19:14+00:00",
-      "evidence": [
-        "L25: Nov 17 09:19:02 gw-fw-01 kernel: [12086.10] [UFW BLOCK] IN=eth0 OUT= SRC=103.42.91.18 DST=10.0.1.15 PROTO=TCP SPT=33011 DPT=3389 SYN",
-        "L26: Nov 17 09:19:08 gw-fw-01 kernel: [12092.41] [UFW BLOCK] IN=eth0 OUT= SRC=103.42.91.18 DST=10.0.1.15 PROTO=TCP SPT=33012 DPT=3389 SYN",
-        "L27: Nov 17 09:19:14 gw-fw-01 kernel: [12098.77] [UFW BLOCK] IN=eth0 OUT= SRC=103.42.91.18 DST=10.0.1.15 PROTO=TCP SPT=33013 DPT=3389 SYN"
-      ],
-      "remediation": "Restrict administrative and database ports to VPN/bastion CIDR ranges."
     }
   ],
   "top_source_ips": [
-    {
-      "ip": "45.155.205.91",
-      "event_count": 9,
-      "alert_count": 1,
-      "sources": [
-        "firewall"
-      ]
-    },
-    {
-      "ip": "185.220.101.4",
-      "event_count": 7,
-      "alert_count": 1,
-      "sources": [
-        "auth"
-      ]
-    },
-    {
-      "ip": "91.240.118.172",
-      "event_count": 6,
-      "alert_count": 2,
-      "sources": [
-        "auth"
-      ]
-    },
     {
       "ip": "198.51.100.42",
       "event_count": 5,
       "alert_count": 2,
       "sources": [
         "web"
-      ]
-    },
-    {
-      "ip": "103.42.91.18",
-      "event_count": 3,
-      "alert_count": 1,
-      "sources": [
-        "firewall"
       ]
     },
     {
@@ -268,45 +131,9 @@
       "sources": [
         "web"
       ]
-    },
-    {
-      "ip": "10.24.8.14",
-      "event_count": 1,
-      "alert_count": 0,
-      "sources": [
-        "auth"
-      ]
-    },
-    {
-      "ip": "127.0.0.1",
-      "event_count": 1,
-      "alert_count": 0,
-      "sources": [
-        "auth"
-      ]
     }
   ],
   "timeline_buckets": [
-    {
-      "bucket": "2026-11-17 09:02",
-      "total": 1,
-      "suspicious": 0
-    },
-    {
-      "bucket": "2026-11-17 09:04",
-      "total": 7,
-      "suspicious": 7
-    },
-    {
-      "bucket": "2026-11-17 09:05",
-      "total": 6,
-      "suspicious": 5
-    },
-    {
-      "bucket": "2026-11-17 09:06",
-      "total": 1,
-      "suspicious": 0
-    },
     {
       "bucket": "2026-11-17 09:12",
       "total": 2,
@@ -326,24 +153,14 @@
       "bucket": "2026-11-17 09:17",
       "total": 3,
       "suspicious": 3
-    },
-    {
-      "bucket": "2026-11-17 09:18",
-      "total": 9,
-      "suspicious": 9
-    },
-    {
-      "bucket": "2026-11-17 09:19",
-      "total": 3,
-      "suspicious": 3
     }
   ],
   "severity_counts": {
-    "critical": 2,
-    "high": 4,
-    "medium": 4,
+    "critical": 1,
+    "high": 2,
+    "medium": 2,
     "low": 0,
     "info": 0
   },
-  "duration_ms": 4.17
+  "duration_ms": 3.73
 }
