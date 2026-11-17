@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sentinel-log"
+version = "1.0.0"
+description = "Streaming Python cybersecurity log analyzer with MITRE ATT&CK mapping and behavioral threat detection."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+sentinel-log = "sentinel_log.cli:main"

@@ -1,0 +1,6 @@
+{
+  "name": "SentinelLog Workbench",
+  "description": "Python cybersecurity log analyzer project workbench with live threat detection, MITRE ATT&CK mapping, unit test runner, and resume kit.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

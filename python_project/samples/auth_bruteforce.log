@@ -1,0 +1,15 @@
+Nov 17 09:02:11 prod-bastion-01 sshd[1842]: Accepted publickey for deploy from 10.24.8.14 port 53210 ssh2
+Nov 17 09:04:01 prod-bastion-01 sshd[1901]: Failed password for invalid user admin from 185.220.101.4 port 51201 ssh2
+Nov 17 09:04:08 prod-bastion-01 sshd[1901]: Failed password for invalid user admin from 185.220.101.4 port 51202 ssh2
+Nov 17 09:04:15 prod-bastion-01 sshd[1901]: Failed password for root from 185.220.101.4 port 51203 ssh2
+Nov 17 09:04:21 prod-bastion-01 sshd[1901]: Failed password for invalid user oracle from 185.220.101.4 port 51204 ssh2
+Nov 17 09:04:29 prod-bastion-01 sshd[1901]: Failed password for invalid user postgres from 185.220.101.4 port 51205 ssh2
+Nov 17 09:04:36 prod-bastion-01 sshd[1901]: Failed password for invalid user ubuntu from 185.220.101.4 port 51206 ssh2
+Nov 17 09:04:44 prod-bastion-01 sshd[1901]: Failed password for invalid user test from 185.220.101.4 port 51207 ssh2
+Nov 17 09:05:10 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60111 ssh2
+Nov 17 09:05:14 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60112 ssh2
+Nov 17 09:05:19 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60113 ssh2
+Nov 17 09:05:24 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60114 ssh2
+Nov 17 09:05:30 prod-bastion-01 sshd[1944]: Failed password for root from 91.240.118.172 port 60115 ssh2
+Nov 17 09:05:42 prod-bastion-01 sshd[1944]: Accepted password for root from 91.240.118.172 port 60116 ssh2
+Nov 17 09:06:00 prod-bastion-01 sudo: pam_unix(sudo:auth): authentication failure; logname=deploy uid=1001 euid=0 tty=/dev/pts/0 ruser=deploy rhost=  user=root

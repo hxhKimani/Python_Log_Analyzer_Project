@@ -1,0 +1,4 @@
+# Core engine uses Python 3.11+ standard library only (zero external runtime dependencies).
+# Optional developer tools for linting and test coverage:
+pytest>=8.0.0
+ruff>=0.6.0
