@@ -1,6 +1,6 @@
 # SentinelLog — Python Cybersecurity Log Analyzer & Workbench
 
-A modular Python 3.11+ cybersecurity log analyzer paired with a local web workbench for testing detections, inspecting MITRE ATT&CK mappings, running unit tests, and exporting SOC incident reports.
+A modular Python 3.11+ cybersecurity log analyzer paired with a local web workbench for testing detections, inspecting MITRE ATT&CK mappings, running unit tests, and exporting SOC incident reports. Mix of independent code with the help of pre-existing sources and Google Ai studio.
 
 ## Features
 
